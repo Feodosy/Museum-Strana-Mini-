@@ -1,0 +1,912 @@
+
+Lidski_castle.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000658  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000a  00800060  00000658  000006ec  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000000e  0080006a  0080006a  000006f6  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000006f6  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000728  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000038  00000000  00000000  00000764  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000c26  00000000  00000000  0000079c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000061e  00000000  00000000  000013c2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000008bf  00000000  00000000  000019e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000090  00000000  00000000  000022a0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000003d3  00000000  00000000  00002330  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000005b2  00000000  00000000  00002703  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000028  00000000  00000000  00002cb5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 74 02 	jmp	0x4e8	; 0x4e8 <__vector_11>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 e5       	ldi	r30, 0x58	; 88
+  68:	f6 e0       	ldi	r31, 0x06	; 6
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	aa 36       	cpi	r26, 0x6A	; 106
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	aa e6       	ldi	r26, 0x6A	; 106
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a8 37       	cpi	r26, 0x78	; 120
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 0d 03 	call	0x61a	; 0x61a <main>
+  8a:	0c 94 2a 03 	jmp	0x654	; 0x654 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <skvazhnost>:
+uint8_t led1_b, led2_b, led3_b, led4_b, led5_b, led6_b, led7_b, led8_b, flor_b, roof_b;                      
+uint8_t count, n;                                                                                                       
+uint8_t temp=1;                                                                                                        
+
+
+void skvazhnost() {                                                                            
+  92:	cf 92       	push	r12
+  94:	df 92       	push	r13
+  96:	ef 92       	push	r14
+  98:	ff 92       	push	r15
+  9a:	0f 93       	push	r16
+  9c:	1f 93       	push	r17
+  9e:	cf 93       	push	r28
+  a0:	df 93       	push	r29
+		else temp = 3; }                                                                         
+		                                           	
+	if (temp==3)  {if (led1 < 255)   {led1 += 1;  if(led1>100) led2 -=1; _delay_us(3400);}                                                           
+		else temp = 4;}                                                                                 
+	if (temp==4)  {if (led2 >   0)   {led2 -= 1; _delay_us(3400);}                                                                                       
+		else temp = 5; }                                                                        
+  a2:	e5 e0       	ldi	r30, 0x05	; 5
+	if (temp==14) {if (led7 >   0)   {led7 -= 1; _delay_us(3400);}                              
+		else temp = 15;}                                                                        
+	if (temp==15) {if (led7 < 255)   {led7 += 1;  if(led7>100) led8 -=1; _delay_us(3400);}       
+		else temp = 16;}                                                                         
+	if (temp==16) {if (led8 >   0)   {led8 -= 1; _delay_us(3400);}                              
+		else temp = 17;}                                                                       
+  a4:	71 e1       	ldi	r23, 0x11	; 17
+	if (temp==13) {if (led6 < 255)   {led6 += 1;  if(led6>100) led7 -=1; _delay_us(3400);}      
+		else temp = 14;}	                                                                    
+	if (temp==14) {if (led7 >   0)   {led7 -= 1; _delay_us(3400);}                              
+		else temp = 15;}                                                                        
+	if (temp==15) {if (led7 < 255)   {led7 += 1;  if(led7>100) led8 -=1; _delay_us(3400);}       
+		else temp = 16;}                                                                         
+  a6:	68 94       	set
+  a8:	ff 24       	eor	r15, r15
+  aa:	f4 f8       	bld	r15, 4
+	if (temp==12) {if (led6 >   0)   {led6 -= 1; _delay_us(3400);}                               
+		else temp = 13;}                                                                         
+	if (temp==13) {if (led6 < 255)   {led6 += 1;  if(led6>100) led7 -=1; _delay_us(3400);}      
+		else temp = 14;}	                                                                    
+	if (temp==14) {if (led7 >   0)   {led7 -= 1; _delay_us(3400);}                              
+		else temp = 15;}                                                                        
+  ac:	6f e0       	ldi	r22, 0x0F	; 15
+	if (temp==11) {if (led5 < 255)   {led5 += 1;  if(led5>100) led6 -=1; _delay_us(3400);}      
+		else temp = 12;}                                                                        
+	if (temp==12) {if (led6 >   0)   {led6 -= 1; _delay_us(3400);}                               
+		else temp = 13;}                                                                         
+	if (temp==13) {if (led6 < 255)   {led6 += 1;  if(led6>100) led7 -=1; _delay_us(3400);}      
+		else temp = 14;}	                                                                    
+  ae:	0e e0       	ldi	r16, 0x0E	; 14
+	if (temp==10) {if (led5 >   0)   {led5 -= 1; _delay_us(3400);}                                
+		else temp = 11;}                                                                        
+	if (temp==11) {if (led5 < 255)   {led5 += 1;  if(led5>100) led6 -=1; _delay_us(3400);}      
+		else temp = 12;}                                                                        
+	if (temp==12) {if (led6 >   0)   {led6 -= 1; _delay_us(3400);}                               
+		else temp = 13;}                                                                         
+  b0:	5d e0       	ldi	r21, 0x0D	; 13
+	if (temp==9)  {if (led4 < 255)   {led4 += 1;  if(led4>100) led5 -=1; _delay_us(3400);}      
+		else temp = 10; }                                                                        
+	if (temp==10) {if (led5 >   0)   {led5 -= 1; _delay_us(3400);}                                
+		else temp = 11;}                                                                        
+	if (temp==11) {if (led5 < 255)   {led5 += 1;  if(led5>100) led6 -=1; _delay_us(3400);}      
+		else temp = 12;}                                                                        
+  b2:	1c e0       	ldi	r17, 0x0C	; 12
+	if (temp==8)  {if (led4 >   0)   {led4 -= 1; _delay_us(3400);}                              
+		else temp = 9; }	                                                                     
+	if (temp==9)  {if (led4 < 255)   {led4 += 1;  if(led4>100) led5 -=1; _delay_us(3400);}      
+		else temp = 10; }                                                                        
+	if (temp==10) {if (led5 >   0)   {led5 -= 1; _delay_us(3400);}                                
+		else temp = 11;}                                                                        
+  b4:	4b e0       	ldi	r20, 0x0B	; 11
+	if (temp==7)  {if (led3 < 255)   {led3 += 1;  if(led3>100) led4 -=1; _delay_us(3400);}       
+		else temp = 8; }                                                                         
+	if (temp==8)  {if (led4 >   0)   {led4 -= 1; _delay_us(3400);}                              
+		else temp = 9; }	                                                                     
+	if (temp==9)  {if (led4 < 255)   {led4 += 1;  if(led4>100) led5 -=1; _delay_us(3400);}      
+		else temp = 10; }                                                                        
+  b6:	da e0       	ldi	r29, 0x0A	; 10
+	if (temp==6)  {if (led3 >   0)   {led3 -= 1; _delay_us(3400);}                               
+		else temp = 7; }                                                                         
+	if (temp==7)  {if (led3 < 255)   {led3 += 1;  if(led3>100) led4 -=1; _delay_us(3400);}       
+		else temp = 8; }                                                                         
+	if (temp==8)  {if (led4 >   0)   {led4 -= 1; _delay_us(3400);}                              
+		else temp = 9; }	                                                                     
+  b8:	39 e0       	ldi	r19, 0x09	; 9
+	if (temp==5)  {if (led2 < 255)   {led2 += 1;  if(led2>100) led3 -=1; _delay_us(3400);}       
+		else temp = 6; }                                                                         
+	if (temp==6)  {if (led3 >   0)   {led3 -= 1; _delay_us(3400);}                               
+		else temp = 7; }                                                                         
+	if (temp==7)  {if (led3 < 255)   {led3 += 1;  if(led3>100) led4 -=1; _delay_us(3400);}       
+		else temp = 8; }                                                                         
+  ba:	c8 e0       	ldi	r28, 0x08	; 8
+	if (temp==4)  {if (led2 >   0)   {led2 -= 1; _delay_us(3400);}                                                                                       
+		else temp = 5; }                                                                        
+	if (temp==5)  {if (led2 < 255)   {led2 += 1;  if(led2>100) led3 -=1; _delay_us(3400);}       
+		else temp = 6; }                                                                         
+	if (temp==6)  {if (led3 >   0)   {led3 -= 1; _delay_us(3400);}                               
+		else temp = 7; }                                                                         
+  bc:	27 e0       	ldi	r18, 0x07	; 7
+	if (temp==3)  {if (led1 < 255)   {led1 += 1;  if(led1>100) led2 -=1; _delay_us(3400);}                                                           
+		else temp = 4;}                                                                                 
+	if (temp==4)  {if (led2 >   0)   {led2 -= 1; _delay_us(3400);}                                                                                       
+		else temp = 5; }                                                                        
+	if (temp==5)  {if (led2 < 255)   {led2 += 1;  if(led2>100) led3 -=1; _delay_us(3400);}       
+		else temp = 6; }                                                                         
+  be:	0f 2e       	mov	r0, r31
+  c0:	f6 e0       	ldi	r31, 0x06	; 6
+  c2:	df 2e       	mov	r13, r31
+  c4:	f0 2d       	mov	r31, r0
+		else temp = 2;}                                                                                          
+	if (temp==2)  {if (led1 >   0)   {led1 -= 1;  if(flor<255) flor+=1; if(roof<170) roof+=2; if((roof>=170) && (roof<255)) roof+=1; _delay_us(3400); }  
+		else temp = 3; }                                                                         
+		                                           	
+	if (temp==3)  {if (led1 < 255)   {led1 += 1;  if(led1>100) led2 -=1; _delay_us(3400);}                                                           
+		else temp = 4;}                                                                                 
+  c6:	68 94       	set
+  c8:	cc 24       	eor	r12, r12
+  ca:	c2 f8       	bld	r12, 2
+void skvazhnost() {                                                                            
+while(1){		  
+	if (temp==1)  {if (n    < 255)   {if(flor < 150) flor+=1; if(roof < 130) roof+=1; _delay_us(6600); n++;}                                   
+		else temp = 2;}                                                                                          
+	if (temp==2)  {if (led1 >   0)   {led1 -= 1;  if(flor<255) flor+=1; if(roof<170) roof+=2; if((roof>=170) && (roof<255)) roof+=1; _delay_us(3400); }  
+		else temp = 3; }                                                                         
+  cc:	93 e0       	ldi	r25, 0x03	; 3
+
+
+void skvazhnost() {                                                                            
+while(1){		  
+	if (temp==1)  {if (n    < 255)   {if(flor < 150) flor+=1; if(roof < 130) roof+=1; _delay_us(6600); n++;}                                   
+		else temp = 2;}                                                                                          
+  ce:	f2 e0       	ldi	r31, 0x02	; 2
+uint8_t temp=1;                                                                                                        
+
+
+void skvazhnost() {                                                                            
+while(1){		  
+	if (temp==1)  {if (n    < 255)   {if(flor < 150) flor+=1; if(roof < 130) roof+=1; _delay_us(6600); n++;}                                   
+  d0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  d4:	81 30       	cpi	r24, 0x01	; 1
+  d6:	09 f5       	brne	.+66     	; 0x11a <skvazhnost+0x88>
+  d8:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <n>
+  dc:	8f 3f       	cpi	r24, 0xFF	; 255
+  de:	d1 f0       	breq	.+52     	; 0x114 <skvazhnost+0x82>
+  e0:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <flor>
+  e4:	86 39       	cpi	r24, 0x96	; 150
+  e6:	18 f4       	brcc	.+6      	; 0xee <skvazhnost+0x5c>
+  e8:	8f 5f       	subi	r24, 0xFF	; 255
+  ea:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <flor>
+  ee:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+  f2:	82 38       	cpi	r24, 0x82	; 130
+  f4:	18 f4       	brcc	.+6      	; 0xfc <skvazhnost+0x6a>
+  f6:	8f 5f       	subi	r24, 0xFF	; 255
+  f8:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <__data_end>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  fc:	af e8       	ldi	r26, 0x8F	; 143
+  fe:	b3 e3       	ldi	r27, 0x33	; 51
+ 100:	11 97       	sbiw	r26, 0x01	; 1
+ 102:	f1 f7       	brne	.-4      	; 0x100 <skvazhnost+0x6e>
+ 104:	00 c0       	rjmp	.+0      	; 0x106 <skvazhnost+0x74>
+ 106:	00 00       	nop
+ 108:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <n>
+ 10c:	8f 5f       	subi	r24, 0xFF	; 255
+ 10e:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <n>
+ 112:	03 c0       	rjmp	.+6      	; 0x11a <skvazhnost+0x88>
+		else temp = 2;}                                                                                          
+ 114:	f0 93 60 00 	sts	0x0060, r31	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 118:	04 c0       	rjmp	.+8      	; 0x122 <skvazhnost+0x90>
+	if (temp==2)  {if (led1 >   0)   {led1 -= 1;  if(flor<255) flor+=1; if(roof<170) roof+=2; if((roof>=170) && (roof<255)) roof+=1; _delay_us(3400); }  
+ 11a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 11e:	82 30       	cpi	r24, 0x02	; 2
+ 120:	51 f5       	brne	.+84     	; 0x176 <skvazhnost+0xe4>
+ 122:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <led1>
+ 126:	88 23       	and	r24, r24
+ 128:	09 f1       	breq	.+66     	; 0x16c <skvazhnost+0xda>
+ 12a:	81 50       	subi	r24, 0x01	; 1
+ 12c:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <led1>
+ 130:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <flor>
+ 134:	8f 3f       	cpi	r24, 0xFF	; 255
+ 136:	19 f0       	breq	.+6      	; 0x13e <skvazhnost+0xac>
+ 138:	8f 5f       	subi	r24, 0xFF	; 255
+ 13a:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <flor>
+ 13e:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+ 142:	8a 3a       	cpi	r24, 0xAA	; 170
+ 144:	18 f4       	brcc	.+6      	; 0x14c <skvazhnost+0xba>
+ 146:	8e 5f       	subi	r24, 0xFE	; 254
+ 148:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <__data_end>
+ 14c:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+ 150:	b6 e5       	ldi	r27, 0x56	; 86
+ 152:	b8 0f       	add	r27, r24
+ 154:	b5 35       	cpi	r27, 0x55	; 85
+ 156:	18 f4       	brcc	.+6      	; 0x15e <skvazhnost+0xcc>
+ 158:	8f 5f       	subi	r24, 0xFF	; 255
+ 15a:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <__data_end>
+ 15e:	af e8       	ldi	r26, 0x8F	; 143
+ 160:	ba e1       	ldi	r27, 0x1A	; 26
+ 162:	11 97       	sbiw	r26, 0x01	; 1
+ 164:	f1 f7       	brne	.-4      	; 0x162 <skvazhnost+0xd0>
+ 166:	00 c0       	rjmp	.+0      	; 0x168 <skvazhnost+0xd6>
+ 168:	00 00       	nop
+ 16a:	05 c0       	rjmp	.+10     	; 0x176 <skvazhnost+0xe4>
+		else temp = 3; }                                                                         
+ 16c:	90 93 60 00 	sts	0x0060, r25	; 0x800060 <__DATA_REGION_ORIGIN__>
+		                                           	
+	if (temp==3)  {if (led1 < 255)   {led1 += 1;  if(led1>100) led2 -=1; _delay_us(3400);}                                                           
+ 170:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <led1>
+ 174:	08 c0       	rjmp	.+16     	; 0x186 <skvazhnost+0xf4>
+ 176:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 17a:	83 30       	cpi	r24, 0x03	; 3
+ 17c:	c1 f4       	brne	.+48     	; 0x1ae <skvazhnost+0x11c>
+ 17e:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <led1>
+ 182:	8f 3f       	cpi	r24, 0xFF	; 255
+ 184:	89 f0       	breq	.+34     	; 0x1a8 <skvazhnost+0x116>
+ 186:	8f 5f       	subi	r24, 0xFF	; 255
+ 188:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <led1>
+ 18c:	85 36       	cpi	r24, 0x65	; 101
+ 18e:	28 f0       	brcs	.+10     	; 0x19a <skvazhnost+0x108>
+ 190:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <led2>
+ 194:	81 50       	subi	r24, 0x01	; 1
+ 196:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <led2>
+ 19a:	af e8       	ldi	r26, 0x8F	; 143
+ 19c:	ba e1       	ldi	r27, 0x1A	; 26
+ 19e:	11 97       	sbiw	r26, 0x01	; 1
+ 1a0:	f1 f7       	brne	.-4      	; 0x19e <skvazhnost+0x10c>
+ 1a2:	00 c0       	rjmp	.+0      	; 0x1a4 <skvazhnost+0x112>
+ 1a4:	00 00       	nop
+ 1a6:	03 c0       	rjmp	.+6      	; 0x1ae <skvazhnost+0x11c>
+		else temp = 4;}                                                                                 
+ 1a8:	c0 92 60 00 	sts	0x0060, r12	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1ac:	04 c0       	rjmp	.+8      	; 0x1b6 <skvazhnost+0x124>
+	if (temp==4)  {if (led2 >   0)   {led2 -= 1; _delay_us(3400);}                                                                                       
+ 1ae:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1b2:	84 30       	cpi	r24, 0x04	; 4
+ 1b4:	99 f4       	brne	.+38     	; 0x1dc <skvazhnost+0x14a>
+ 1b6:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <led2>
+ 1ba:	88 23       	and	r24, r24
+ 1bc:	51 f0       	breq	.+20     	; 0x1d2 <skvazhnost+0x140>
+ 1be:	81 50       	subi	r24, 0x01	; 1
+ 1c0:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <led2>
+ 1c4:	af e8       	ldi	r26, 0x8F	; 143
+ 1c6:	ba e1       	ldi	r27, 0x1A	; 26
+ 1c8:	11 97       	sbiw	r26, 0x01	; 1
+ 1ca:	f1 f7       	brne	.-4      	; 0x1c8 <skvazhnost+0x136>
+ 1cc:	00 c0       	rjmp	.+0      	; 0x1ce <skvazhnost+0x13c>
+ 1ce:	00 00       	nop
+ 1d0:	05 c0       	rjmp	.+10     	; 0x1dc <skvazhnost+0x14a>
+		else temp = 5; }                                                                        
+ 1d2:	e0 93 60 00 	sts	0x0060, r30	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==5)  {if (led2 < 255)   {led2 += 1;  if(led2>100) led3 -=1; _delay_us(3400);}       
+ 1d6:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <led2>
+ 1da:	08 c0       	rjmp	.+16     	; 0x1ec <skvazhnost+0x15a>
+ 1dc:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1e0:	85 30       	cpi	r24, 0x05	; 5
+ 1e2:	c1 f4       	brne	.+48     	; 0x214 <skvazhnost+0x182>
+ 1e4:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <led2>
+ 1e8:	8f 3f       	cpi	r24, 0xFF	; 255
+ 1ea:	89 f0       	breq	.+34     	; 0x20e <skvazhnost+0x17c>
+ 1ec:	8f 5f       	subi	r24, 0xFF	; 255
+ 1ee:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <led2>
+ 1f2:	85 36       	cpi	r24, 0x65	; 101
+ 1f4:	28 f0       	brcs	.+10     	; 0x200 <skvazhnost+0x16e>
+ 1f6:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <led3>
+ 1fa:	81 50       	subi	r24, 0x01	; 1
+ 1fc:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <led3>
+ 200:	af e8       	ldi	r26, 0x8F	; 143
+ 202:	ba e1       	ldi	r27, 0x1A	; 26
+ 204:	11 97       	sbiw	r26, 0x01	; 1
+ 206:	f1 f7       	brne	.-4      	; 0x204 <skvazhnost+0x172>
+ 208:	00 c0       	rjmp	.+0      	; 0x20a <skvazhnost+0x178>
+ 20a:	00 00       	nop
+ 20c:	03 c0       	rjmp	.+6      	; 0x214 <skvazhnost+0x182>
+		else temp = 6; }                                                                         
+ 20e:	d0 92 60 00 	sts	0x0060, r13	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 212:	04 c0       	rjmp	.+8      	; 0x21c <skvazhnost+0x18a>
+	if (temp==6)  {if (led3 >   0)   {led3 -= 1; _delay_us(3400);}                               
+ 214:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 218:	86 30       	cpi	r24, 0x06	; 6
+ 21a:	99 f4       	brne	.+38     	; 0x242 <skvazhnost+0x1b0>
+ 21c:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <led3>
+ 220:	88 23       	and	r24, r24
+ 222:	51 f0       	breq	.+20     	; 0x238 <skvazhnost+0x1a6>
+ 224:	81 50       	subi	r24, 0x01	; 1
+ 226:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <led3>
+ 22a:	af e8       	ldi	r26, 0x8F	; 143
+ 22c:	ba e1       	ldi	r27, 0x1A	; 26
+ 22e:	11 97       	sbiw	r26, 0x01	; 1
+ 230:	f1 f7       	brne	.-4      	; 0x22e <skvazhnost+0x19c>
+ 232:	00 c0       	rjmp	.+0      	; 0x234 <skvazhnost+0x1a2>
+ 234:	00 00       	nop
+ 236:	05 c0       	rjmp	.+10     	; 0x242 <skvazhnost+0x1b0>
+		else temp = 7; }                                                                         
+ 238:	20 93 60 00 	sts	0x0060, r18	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==7)  {if (led3 < 255)   {led3 += 1;  if(led3>100) led4 -=1; _delay_us(3400);}       
+ 23c:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <led3>
+ 240:	08 c0       	rjmp	.+16     	; 0x252 <skvazhnost+0x1c0>
+ 242:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 246:	87 30       	cpi	r24, 0x07	; 7
+ 248:	c1 f4       	brne	.+48     	; 0x27a <skvazhnost+0x1e8>
+ 24a:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <led3>
+ 24e:	8f 3f       	cpi	r24, 0xFF	; 255
+ 250:	89 f0       	breq	.+34     	; 0x274 <skvazhnost+0x1e2>
+ 252:	8f 5f       	subi	r24, 0xFF	; 255
+ 254:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <led3>
+ 258:	85 36       	cpi	r24, 0x65	; 101
+ 25a:	28 f0       	brcs	.+10     	; 0x266 <skvazhnost+0x1d4>
+ 25c:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <led4>
+ 260:	81 50       	subi	r24, 0x01	; 1
+ 262:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <led4>
+ 266:	af e8       	ldi	r26, 0x8F	; 143
+ 268:	ba e1       	ldi	r27, 0x1A	; 26
+ 26a:	11 97       	sbiw	r26, 0x01	; 1
+ 26c:	f1 f7       	brne	.-4      	; 0x26a <skvazhnost+0x1d8>
+ 26e:	00 c0       	rjmp	.+0      	; 0x270 <skvazhnost+0x1de>
+ 270:	00 00       	nop
+ 272:	03 c0       	rjmp	.+6      	; 0x27a <skvazhnost+0x1e8>
+		else temp = 8; }                                                                         
+ 274:	c0 93 60 00 	sts	0x0060, r28	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 278:	04 c0       	rjmp	.+8      	; 0x282 <skvazhnost+0x1f0>
+	if (temp==8)  {if (led4 >   0)   {led4 -= 1; _delay_us(3400);}                              
+ 27a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 27e:	88 30       	cpi	r24, 0x08	; 8
+ 280:	99 f4       	brne	.+38     	; 0x2a8 <skvazhnost+0x216>
+ 282:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <led4>
+ 286:	88 23       	and	r24, r24
+ 288:	51 f0       	breq	.+20     	; 0x29e <skvazhnost+0x20c>
+ 28a:	81 50       	subi	r24, 0x01	; 1
+ 28c:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <led4>
+ 290:	af e8       	ldi	r26, 0x8F	; 143
+ 292:	ba e1       	ldi	r27, 0x1A	; 26
+ 294:	11 97       	sbiw	r26, 0x01	; 1
+ 296:	f1 f7       	brne	.-4      	; 0x294 <skvazhnost+0x202>
+ 298:	00 c0       	rjmp	.+0      	; 0x29a <skvazhnost+0x208>
+ 29a:	00 00       	nop
+ 29c:	05 c0       	rjmp	.+10     	; 0x2a8 <skvazhnost+0x216>
+		else temp = 9; }	                                                                     
+ 29e:	30 93 60 00 	sts	0x0060, r19	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==9)  {if (led4 < 255)   {led4 += 1;  if(led4>100) led5 -=1; _delay_us(3400);}      
+ 2a2:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <led4>
+ 2a6:	08 c0       	rjmp	.+16     	; 0x2b8 <skvazhnost+0x226>
+ 2a8:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2ac:	89 30       	cpi	r24, 0x09	; 9
+ 2ae:	c1 f4       	brne	.+48     	; 0x2e0 <skvazhnost+0x24e>
+ 2b0:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <led4>
+ 2b4:	8f 3f       	cpi	r24, 0xFF	; 255
+ 2b6:	89 f0       	breq	.+34     	; 0x2da <skvazhnost+0x248>
+ 2b8:	8f 5f       	subi	r24, 0xFF	; 255
+ 2ba:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <led4>
+ 2be:	85 36       	cpi	r24, 0x65	; 101
+ 2c0:	28 f0       	brcs	.+10     	; 0x2cc <skvazhnost+0x23a>
+ 2c2:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <led5>
+ 2c6:	81 50       	subi	r24, 0x01	; 1
+ 2c8:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <led5>
+ 2cc:	af e8       	ldi	r26, 0x8F	; 143
+ 2ce:	ba e1       	ldi	r27, 0x1A	; 26
+ 2d0:	11 97       	sbiw	r26, 0x01	; 1
+ 2d2:	f1 f7       	brne	.-4      	; 0x2d0 <skvazhnost+0x23e>
+ 2d4:	00 c0       	rjmp	.+0      	; 0x2d6 <skvazhnost+0x244>
+ 2d6:	00 00       	nop
+ 2d8:	03 c0       	rjmp	.+6      	; 0x2e0 <skvazhnost+0x24e>
+		else temp = 10; }                                                                        
+ 2da:	d0 93 60 00 	sts	0x0060, r29	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2de:	04 c0       	rjmp	.+8      	; 0x2e8 <skvazhnost+0x256>
+	if (temp==10) {if (led5 >   0)   {led5 -= 1; _delay_us(3400);}                                
+ 2e0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 2e4:	8a 30       	cpi	r24, 0x0A	; 10
+ 2e6:	99 f4       	brne	.+38     	; 0x30e <skvazhnost+0x27c>
+ 2e8:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <led5>
+ 2ec:	88 23       	and	r24, r24
+ 2ee:	51 f0       	breq	.+20     	; 0x304 <skvazhnost+0x272>
+ 2f0:	81 50       	subi	r24, 0x01	; 1
+ 2f2:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <led5>
+ 2f6:	af e8       	ldi	r26, 0x8F	; 143
+ 2f8:	ba e1       	ldi	r27, 0x1A	; 26
+ 2fa:	11 97       	sbiw	r26, 0x01	; 1
+ 2fc:	f1 f7       	brne	.-4      	; 0x2fa <skvazhnost+0x268>
+ 2fe:	00 c0       	rjmp	.+0      	; 0x300 <skvazhnost+0x26e>
+ 300:	00 00       	nop
+ 302:	05 c0       	rjmp	.+10     	; 0x30e <skvazhnost+0x27c>
+		else temp = 11;}                                                                        
+ 304:	40 93 60 00 	sts	0x0060, r20	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==11) {if (led5 < 255)   {led5 += 1;  if(led5>100) led6 -=1; _delay_us(3400);}      
+ 308:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <led5>
+ 30c:	08 c0       	rjmp	.+16     	; 0x31e <skvazhnost+0x28c>
+ 30e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 312:	8b 30       	cpi	r24, 0x0B	; 11
+ 314:	c1 f4       	brne	.+48     	; 0x346 <skvazhnost+0x2b4>
+ 316:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <led5>
+ 31a:	8f 3f       	cpi	r24, 0xFF	; 255
+ 31c:	89 f0       	breq	.+34     	; 0x340 <skvazhnost+0x2ae>
+ 31e:	8f 5f       	subi	r24, 0xFF	; 255
+ 320:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <led5>
+ 324:	85 36       	cpi	r24, 0x65	; 101
+ 326:	28 f0       	brcs	.+10     	; 0x332 <skvazhnost+0x2a0>
+ 328:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <led6>
+ 32c:	81 50       	subi	r24, 0x01	; 1
+ 32e:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <led6>
+ 332:	af e8       	ldi	r26, 0x8F	; 143
+ 334:	ba e1       	ldi	r27, 0x1A	; 26
+ 336:	11 97       	sbiw	r26, 0x01	; 1
+ 338:	f1 f7       	brne	.-4      	; 0x336 <skvazhnost+0x2a4>
+ 33a:	00 c0       	rjmp	.+0      	; 0x33c <skvazhnost+0x2aa>
+ 33c:	00 00       	nop
+ 33e:	03 c0       	rjmp	.+6      	; 0x346 <skvazhnost+0x2b4>
+		else temp = 12;}                                                                        
+ 340:	10 93 60 00 	sts	0x0060, r17	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 344:	04 c0       	rjmp	.+8      	; 0x34e <skvazhnost+0x2bc>
+	if (temp==12) {if (led6 >   0)   {led6 -= 1; _delay_us(3400);}                               
+ 346:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 34a:	8c 30       	cpi	r24, 0x0C	; 12
+ 34c:	99 f4       	brne	.+38     	; 0x374 <skvazhnost+0x2e2>
+ 34e:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <led6>
+ 352:	88 23       	and	r24, r24
+ 354:	51 f0       	breq	.+20     	; 0x36a <skvazhnost+0x2d8>
+ 356:	81 50       	subi	r24, 0x01	; 1
+ 358:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <led6>
+ 35c:	af e8       	ldi	r26, 0x8F	; 143
+ 35e:	ba e1       	ldi	r27, 0x1A	; 26
+ 360:	11 97       	sbiw	r26, 0x01	; 1
+ 362:	f1 f7       	brne	.-4      	; 0x360 <skvazhnost+0x2ce>
+ 364:	00 c0       	rjmp	.+0      	; 0x366 <skvazhnost+0x2d4>
+ 366:	00 00       	nop
+ 368:	05 c0       	rjmp	.+10     	; 0x374 <skvazhnost+0x2e2>
+		else temp = 13;}                                                                         
+ 36a:	50 93 60 00 	sts	0x0060, r21	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==13) {if (led6 < 255)   {led6 += 1;  if(led6>100) led7 -=1; _delay_us(3400);}      
+ 36e:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <led6>
+ 372:	08 c0       	rjmp	.+16     	; 0x384 <skvazhnost+0x2f2>
+ 374:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 378:	8d 30       	cpi	r24, 0x0D	; 13
+ 37a:	c1 f4       	brne	.+48     	; 0x3ac <skvazhnost+0x31a>
+ 37c:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <led6>
+ 380:	8f 3f       	cpi	r24, 0xFF	; 255
+ 382:	89 f0       	breq	.+34     	; 0x3a6 <skvazhnost+0x314>
+ 384:	8f 5f       	subi	r24, 0xFF	; 255
+ 386:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <led6>
+ 38a:	85 36       	cpi	r24, 0x65	; 101
+ 38c:	28 f0       	brcs	.+10     	; 0x398 <skvazhnost+0x306>
+ 38e:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <led7>
+ 392:	81 50       	subi	r24, 0x01	; 1
+ 394:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <led7>
+ 398:	af e8       	ldi	r26, 0x8F	; 143
+ 39a:	ba e1       	ldi	r27, 0x1A	; 26
+ 39c:	11 97       	sbiw	r26, 0x01	; 1
+ 39e:	f1 f7       	brne	.-4      	; 0x39c <skvazhnost+0x30a>
+ 3a0:	00 c0       	rjmp	.+0      	; 0x3a2 <skvazhnost+0x310>
+ 3a2:	00 00       	nop
+ 3a4:	03 c0       	rjmp	.+6      	; 0x3ac <skvazhnost+0x31a>
+		else temp = 14;}	                                                                    
+ 3a6:	00 93 60 00 	sts	0x0060, r16	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3aa:	04 c0       	rjmp	.+8      	; 0x3b4 <skvazhnost+0x322>
+	if (temp==14) {if (led7 >   0)   {led7 -= 1; _delay_us(3400);}                              
+ 3ac:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3b0:	8e 30       	cpi	r24, 0x0E	; 14
+ 3b2:	99 f4       	brne	.+38     	; 0x3da <skvazhnost+0x348>
+ 3b4:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <led7>
+ 3b8:	88 23       	and	r24, r24
+ 3ba:	51 f0       	breq	.+20     	; 0x3d0 <skvazhnost+0x33e>
+ 3bc:	81 50       	subi	r24, 0x01	; 1
+ 3be:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <led7>
+ 3c2:	af e8       	ldi	r26, 0x8F	; 143
+ 3c4:	ba e1       	ldi	r27, 0x1A	; 26
+ 3c6:	11 97       	sbiw	r26, 0x01	; 1
+ 3c8:	f1 f7       	brne	.-4      	; 0x3c6 <skvazhnost+0x334>
+ 3ca:	00 c0       	rjmp	.+0      	; 0x3cc <skvazhnost+0x33a>
+ 3cc:	00 00       	nop
+ 3ce:	05 c0       	rjmp	.+10     	; 0x3da <skvazhnost+0x348>
+		else temp = 15;}                                                                        
+ 3d0:	60 93 60 00 	sts	0x0060, r22	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==15) {if (led7 < 255)   {led7 += 1;  if(led7>100) led8 -=1; _delay_us(3400);}       
+ 3d4:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <led7>
+ 3d8:	08 c0       	rjmp	.+16     	; 0x3ea <skvazhnost+0x358>
+ 3da:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 3de:	8f 30       	cpi	r24, 0x0F	; 15
+ 3e0:	c1 f4       	brne	.+48     	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
+ 3e2:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <led7>
+ 3e6:	8f 3f       	cpi	r24, 0xFF	; 255
+ 3e8:	89 f0       	breq	.+34     	; 0x40c <__LOCK_REGION_LENGTH__+0xc>
+ 3ea:	8f 5f       	subi	r24, 0xFF	; 255
+ 3ec:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <led7>
+ 3f0:	85 36       	cpi	r24, 0x65	; 101
+ 3f2:	28 f0       	brcs	.+10     	; 0x3fe <skvazhnost+0x36c>
+ 3f4:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <led8>
+ 3f8:	81 50       	subi	r24, 0x01	; 1
+ 3fa:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <led8>
+ 3fe:	af e8       	ldi	r26, 0x8F	; 143
+ 400:	ba e1       	ldi	r27, 0x1A	; 26
+ 402:	11 97       	sbiw	r26, 0x01	; 1
+ 404:	f1 f7       	brne	.-4      	; 0x402 <__LOCK_REGION_LENGTH__+0x2>
+ 406:	00 c0       	rjmp	.+0      	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
+ 408:	00 00       	nop
+ 40a:	03 c0       	rjmp	.+6      	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
+		else temp = 16;}                                                                         
+ 40c:	f0 92 60 00 	sts	0x0060, r15	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 410:	04 c0       	rjmp	.+8      	; 0x41a <__LOCK_REGION_LENGTH__+0x1a>
+	if (temp==16) {if (led8 >   0)   {led8 -= 1; _delay_us(3400);}                              
+ 412:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 416:	80 31       	cpi	r24, 0x10	; 16
+ 418:	99 f4       	brne	.+38     	; 0x440 <__LOCK_REGION_LENGTH__+0x40>
+ 41a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <led8>
+ 41e:	88 23       	and	r24, r24
+ 420:	51 f0       	breq	.+20     	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+ 422:	81 50       	subi	r24, 0x01	; 1
+ 424:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <led8>
+ 428:	af e8       	ldi	r26, 0x8F	; 143
+ 42a:	ba e1       	ldi	r27, 0x1A	; 26
+ 42c:	11 97       	sbiw	r26, 0x01	; 1
+ 42e:	f1 f7       	brne	.-4      	; 0x42c <__LOCK_REGION_LENGTH__+0x2c>
+ 430:	00 c0       	rjmp	.+0      	; 0x432 <__LOCK_REGION_LENGTH__+0x32>
+ 432:	00 00       	nop
+ 434:	05 c0       	rjmp	.+10     	; 0x440 <__LOCK_REGION_LENGTH__+0x40>
+		else temp = 17;}                                                                       
+ 436:	70 93 60 00 	sts	0x0060, r23	; 0x800060 <__DATA_REGION_ORIGIN__>
+	if (temp==17) {if (led8 < 255)   {led8 += 1;  if((roof > 130) && (led8 > 125)) roof -=1; _delay_us(3400);}       
+ 43a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <led8>
+ 43e:	08 c0       	rjmp	.+16     	; 0x450 <__LOCK_REGION_LENGTH__+0x50>
+ 440:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 444:	81 31       	cpi	r24, 0x11	; 17
+ 446:	e9 f4       	brne	.+58     	; 0x482 <__LOCK_REGION_LENGTH__+0x82>
+ 448:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <led8>
+ 44c:	8f 3f       	cpi	r24, 0xFF	; 255
+ 44e:	a9 f0       	breq	.+42     	; 0x47a <__LOCK_REGION_LENGTH__+0x7a>
+ 450:	8f 5f       	subi	r24, 0xFF	; 255
+ 452:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <led8>
+ 456:	b0 91 6a 00 	lds	r27, 0x006A	; 0x80006a <__data_end>
+ 45a:	b3 38       	cpi	r27, 0x83	; 131
+ 45c:	38 f0       	brcs	.+14     	; 0x46c <__LOCK_REGION_LENGTH__+0x6c>
+ 45e:	8e 37       	cpi	r24, 0x7E	; 126
+ 460:	28 f0       	brcs	.+10     	; 0x46c <__LOCK_REGION_LENGTH__+0x6c>
+ 462:	ee 24       	eor	r14, r14
+ 464:	ea 94       	dec	r14
+ 466:	eb 0e       	add	r14, r27
+ 468:	e0 92 6a 00 	sts	0x006A, r14	; 0x80006a <__data_end>
+ 46c:	af e8       	ldi	r26, 0x8F	; 143
+ 46e:	ba e1       	ldi	r27, 0x1A	; 26
+ 470:	11 97       	sbiw	r26, 0x01	; 1
+ 472:	f1 f7       	brne	.-4      	; 0x470 <__LOCK_REGION_LENGTH__+0x70>
+ 474:	00 c0       	rjmp	.+0      	; 0x476 <__LOCK_REGION_LENGTH__+0x76>
+ 476:	00 00       	nop
+ 478:	04 c0       	rjmp	.+8      	; 0x482 <__LOCK_REGION_LENGTH__+0x82>
+		else {temp = 18; }}	                                                                    
+ 47a:	82 e1       	ldi	r24, 0x12	; 18
+ 47c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 480:	05 c0       	rjmp	.+10     	; 0x48c <__LOCK_REGION_LENGTH__+0x8c>
+	if (temp==18) {if (flor >   0)   {flor -= 1;  if(roof>0) roof -=1; _delay_us(6600);}         
+ 482:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 486:	82 31       	cpi	r24, 0x12	; 18
+ 488:	09 f0       	breq	.+2      	; 0x48c <__LOCK_REGION_LENGTH__+0x8c>
+ 48a:	22 ce       	rjmp	.-956    	; 0xd0 <skvazhnost+0x3e>
+ 48c:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <flor>
+ 490:	88 23       	and	r24, r24
+ 492:	89 f0       	breq	.+34     	; 0x4b6 <__LOCK_REGION_LENGTH__+0xb6>
+ 494:	81 50       	subi	r24, 0x01	; 1
+ 496:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <flor>
+ 49a:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+ 49e:	88 23       	and	r24, r24
+ 4a0:	19 f0       	breq	.+6      	; 0x4a8 <__LOCK_REGION_LENGTH__+0xa8>
+ 4a2:	81 50       	subi	r24, 0x01	; 1
+ 4a4:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <__data_end>
+ 4a8:	8f e8       	ldi	r24, 0x8F	; 143
+ 4aa:	93 e3       	ldi	r25, 0x33	; 51
+ 4ac:	01 97       	sbiw	r24, 0x01	; 1
+ 4ae:	f1 f7       	brne	.-4      	; 0x4ac <__LOCK_REGION_LENGTH__+0xac>
+ 4b0:	00 c0       	rjmp	.+0      	; 0x4b2 <__LOCK_REGION_LENGTH__+0xb2>
+ 4b2:	00 00       	nop
+ 4b4:	08 ce       	rjmp	.-1008   	; 0xc6 <skvazhnost+0x34>
+		else {temp = 1; n=0; return;}}		                                                    
+ 4b6:	81 e0       	ldi	r24, 0x01	; 1
+ 4b8:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 4bc:	10 92 6e 00 	sts	0x006E, r1	; 0x80006e <n>
+		}
+	}
+ 4c0:	df 91       	pop	r29
+ 4c2:	cf 91       	pop	r28
+ 4c4:	1f 91       	pop	r17
+ 4c6:	0f 91       	pop	r16
+ 4c8:	ff 90       	pop	r15
+ 4ca:	ef 90       	pop	r14
+ 4cc:	df 90       	pop	r13
+ 4ce:	cf 90       	pop	r12
+ 4d0:	08 95       	ret
+
+000004d2 <initial_ports>:
+	
+void initial_ports() {
+DDRA=0b11111110;                     
+ 4d2:	8e ef       	ldi	r24, 0xFE	; 254
+ 4d4:	8a bb       	out	0x1a, r24	; 26
+PORTA=0; 
+ 4d6:	1b ba       	out	0x1b, r1	; 27
+
+DDRD=0b00111100;                    
+ 4d8:	8c e3       	ldi	r24, 0x3C	; 60
+ 4da:	81 bb       	out	0x11, r24	; 17
+PORTD|=(1<<3) | (1<<4);
+ 4dc:	82 b3       	in	r24, 0x12	; 18
+ 4de:	88 61       	ori	r24, 0x18	; 24
+ 4e0:	82 bb       	out	0x12, r24	; 18
+
+DDRC&=~(1<<7);                       
+ 4e2:	a7 98       	cbi	0x14, 7	; 20
+PORTC|=(1<<7);
+ 4e4:	af 9a       	sbi	0x15, 7	; 21
+ 4e6:	08 95       	ret
+
+000004e8 <__vector_11>:
+
+}
+
+
+ISR (TIMER0_OVF_vect)
+{
+ 4e8:	1f 92       	push	r1
+ 4ea:	0f 92       	push	r0
+ 4ec:	0f b6       	in	r0, 0x3f	; 63
+ 4ee:	0f 92       	push	r0
+ 4f0:	11 24       	eor	r1, r1
+ 4f2:	8f 93       	push	r24
+ 4f4:	9f 93       	push	r25
+count++;
+ 4f6:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <count>
+ 4fa:	8f 5f       	subi	r24, 0xFF	; 255
+ 4fc:	80 93 75 00 	sts	0x0075, r24	; 0x800075 <count>
+if (count == 0){                                 
+ 500:	81 11       	cpse	r24, r1
+ 502:	2a c0       	rjmp	.+84     	; 0x558 <__vector_11+0x70>
+        
+        led1_b  = led1;                           
+ 504:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <led1>
+ 508:	80 93 73 00 	sts	0x0073, r24	; 0x800073 <led1_b>
+        led2_b  = led2; 
+ 50c:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <led2>
+ 510:	80 93 74 00 	sts	0x0074, r24	; 0x800074 <led2_b>
+        led3_b  = led3;
+ 514:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <led3>
+ 518:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <led3_b>
+		led4_b  = led4;
+ 51c:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <led4>
+ 520:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <led4_b>
+		led5_b  = led5;
+ 524:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <led5>
+ 528:	80 93 77 00 	sts	0x0077, r24	; 0x800077 <led5_b>
+		led6_b  = led6;
+ 52c:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <led6>
+ 530:	80 93 71 00 	sts	0x0071, r24	; 0x800071 <led6_b>
+		led7_b  = led7;
+ 534:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <led7>
+ 538:	80 93 76 00 	sts	0x0076, r24	; 0x800076 <led7_b>
+		led8_b  = led8;
+ 53c:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <led8>
+ 540:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <led8_b>
+		roof_b  = roof;
+ 544:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+ 548:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <roof_b>
+		flor_b = flor;
+ 54c:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <flor>
+ 550:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <flor_b>
+		
+       PORTA=0b00000000;                          
+ 554:	1b ba       	out	0x1b, r1	; 27
+       PORTD=0b00000000;                       
+ 556:	12 ba       	out	0x12, r1	; 18
+        }
+
+if ((led1_b == count)  && (led1_b!=255))  { PORTA|=(1<<1);}            
+ 558:	80 91 73 00 	lds	r24, 0x0073	; 0x800073 <led1_b>
+ 55c:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 560:	89 13       	cpse	r24, r25
+ 562:	03 c0       	rjmp	.+6      	; 0x56a <__vector_11+0x82>
+ 564:	8f 3f       	cpi	r24, 0xFF	; 255
+ 566:	09 f0       	breq	.+2      	; 0x56a <__vector_11+0x82>
+ 568:	d9 9a       	sbi	0x1b, 1	; 27
+if ((led2_b == count)  && (led2_b!=255))  { PORTA|=(1<<2);}
+ 56a:	80 91 74 00 	lds	r24, 0x0074	; 0x800074 <led2_b>
+ 56e:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 572:	89 13       	cpse	r24, r25
+ 574:	03 c0       	rjmp	.+6      	; 0x57c <__vector_11+0x94>
+ 576:	8f 3f       	cpi	r24, 0xFF	; 255
+ 578:	09 f0       	breq	.+2      	; 0x57c <__vector_11+0x94>
+ 57a:	da 9a       	sbi	0x1b, 2	; 27
+if ((led3_b == count)  && (led3_b!=255))  { PORTA|=(1<<3);}
+ 57c:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <led3_b>
+ 580:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 584:	89 13       	cpse	r24, r25
+ 586:	03 c0       	rjmp	.+6      	; 0x58e <__vector_11+0xa6>
+ 588:	8f 3f       	cpi	r24, 0xFF	; 255
+ 58a:	09 f0       	breq	.+2      	; 0x58e <__vector_11+0xa6>
+ 58c:	db 9a       	sbi	0x1b, 3	; 27
+if ((led4_b == count)  && (led4_b!=255))  { PORTA|=(1<<4);}
+ 58e:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <led4_b>
+ 592:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 596:	89 13       	cpse	r24, r25
+ 598:	03 c0       	rjmp	.+6      	; 0x5a0 <__vector_11+0xb8>
+ 59a:	8f 3f       	cpi	r24, 0xFF	; 255
+ 59c:	09 f0       	breq	.+2      	; 0x5a0 <__vector_11+0xb8>
+ 59e:	dc 9a       	sbi	0x1b, 4	; 27
+if ((led5_b == count)  && (led5_b!=255))  { PORTA|=(1<<5);}
+ 5a0:	80 91 77 00 	lds	r24, 0x0077	; 0x800077 <led5_b>
+ 5a4:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 5a8:	89 13       	cpse	r24, r25
+ 5aa:	03 c0       	rjmp	.+6      	; 0x5b2 <__vector_11+0xca>
+ 5ac:	8f 3f       	cpi	r24, 0xFF	; 255
+ 5ae:	09 f0       	breq	.+2      	; 0x5b2 <__vector_11+0xca>
+ 5b0:	dd 9a       	sbi	0x1b, 5	; 27
+if ((led6_b == count)  && (led6_b!=255))  { PORTA|=(1<<6);}
+ 5b2:	80 91 71 00 	lds	r24, 0x0071	; 0x800071 <led6_b>
+ 5b6:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 5ba:	89 13       	cpse	r24, r25
+ 5bc:	03 c0       	rjmp	.+6      	; 0x5c4 <__vector_11+0xdc>
+ 5be:	8f 3f       	cpi	r24, 0xFF	; 255
+ 5c0:	09 f0       	breq	.+2      	; 0x5c4 <__vector_11+0xdc>
+ 5c2:	de 9a       	sbi	0x1b, 6	; 27
+if ((led7_b == count)  && (led7_b!=255))  { PORTA|=(1<<7);}
+ 5c4:	80 91 76 00 	lds	r24, 0x0076	; 0x800076 <led7_b>
+ 5c8:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 5cc:	89 13       	cpse	r24, r25
+ 5ce:	03 c0       	rjmp	.+6      	; 0x5d6 <__vector_11+0xee>
+ 5d0:	8f 3f       	cpi	r24, 0xFF	; 255
+ 5d2:	09 f0       	breq	.+2      	; 0x5d6 <__vector_11+0xee>
+ 5d4:	df 9a       	sbi	0x1b, 7	; 27
+if ((led8_b == count)  && (led8_b!=255))  { PORTD|=(1<<2);}
+ 5d6:	80 91 6f 00 	lds	r24, 0x006F	; 0x80006f <led8_b>
+ 5da:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 5de:	89 13       	cpse	r24, r25
+ 5e0:	03 c0       	rjmp	.+6      	; 0x5e8 <__vector_11+0x100>
+ 5e2:	8f 3f       	cpi	r24, 0xFF	; 255
+ 5e4:	09 f0       	breq	.+2      	; 0x5e8 <__vector_11+0x100>
+ 5e6:	92 9a       	sbi	0x12, 2	; 18
+if ((roof_b == count)  && (roof_b!=255))  { PORTD|=(1<<3);}
+ 5e8:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <roof_b>
+ 5ec:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 5f0:	89 13       	cpse	r24, r25
+ 5f2:	03 c0       	rjmp	.+6      	; 0x5fa <__vector_11+0x112>
+ 5f4:	8f 3f       	cpi	r24, 0xFF	; 255
+ 5f6:	09 f0       	breq	.+2      	; 0x5fa <__vector_11+0x112>
+ 5f8:	93 9a       	sbi	0x12, 3	; 18
+if ((flor_b == count)  && (flor_b!=255))  { PORTD|=(1<<4);}
+ 5fa:	80 91 70 00 	lds	r24, 0x0070	; 0x800070 <flor_b>
+ 5fe:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <count>
+ 602:	89 13       	cpse	r24, r25
+ 604:	03 c0       	rjmp	.+6      	; 0x60c <__vector_11+0x124>
+ 606:	8f 3f       	cpi	r24, 0xFF	; 255
+ 608:	09 f0       	breq	.+2      	; 0x60c <__vector_11+0x124>
+ 60a:	94 9a       	sbi	0x12, 4	; 18
+}
+ 60c:	9f 91       	pop	r25
+ 60e:	8f 91       	pop	r24
+ 610:	0f 90       	pop	r0
+ 612:	0f be       	out	0x3f, r0	; 63
+ 614:	0f 90       	pop	r0
+ 616:	1f 90       	pop	r1
+ 618:	18 95       	reti
+
+0000061a <main>:
+
+
+
+int main(void) {
+initial_ports();                     
+ 61a:	0e 94 69 02 	call	0x4d2	; 0x4d2 <initial_ports>
+
+TIMSK&=~(1<<TOIE0);                  
+ 61e:	89 b7       	in	r24, 0x39	; 57
+ 620:	8e 7f       	andi	r24, 0xFE	; 254
+ 622:	89 bf       	out	0x39, r24	; 57
+TCCR0|=(1<<CS00);                   
+ 624:	83 b7       	in	r24, 0x33	; 51
+ 626:	81 60       	ori	r24, 0x01	; 1
+ 628:	83 bf       	out	0x33, r24	; 51
+sei();                              
+ 62a:	78 94       	sei
+                                     
+while (1)                                       
+      {
+		if((PINC & (1<<7))) {      
+ 62c:	9f 9b       	sbis	0x13, 7	; 19
+ 62e:	08 c0       	rjmp	.+16     	; 0x640 <main+0x26>
+	    TIMSK|=(1<<TOIE0);           
+ 630:	89 b7       	in	r24, 0x39	; 57
+ 632:	81 60       	ori	r24, 0x01	; 1
+ 634:	89 bf       	out	0x39, r24	; 57
+		skvazhnost();                
+ 636:	0e 94 49 00 	call	0x92	; 0x92 <skvazhnost>
+		TIMSK&=~(1<<TOIE0);          
+ 63a:	89 b7       	in	r24, 0x39	; 57
+ 63c:	8e 7f       	andi	r24, 0xFE	; 254
+ 63e:	89 bf       	out	0x39, r24	; 57
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 640:	2f ef       	ldi	r18, 0xFF	; 255
+ 642:	84 e3       	ldi	r24, 0x34	; 52
+ 644:	9c e0       	ldi	r25, 0x0C	; 12
+ 646:	21 50       	subi	r18, 0x01	; 1
+ 648:	80 40       	sbci	r24, 0x00	; 0
+ 64a:	90 40       	sbci	r25, 0x00	; 0
+ 64c:	e1 f7       	brne	.-8      	; 0x646 <main+0x2c>
+ 64e:	00 c0       	rjmp	.+0      	; 0x650 <main+0x36>
+ 650:	00 00       	nop
+ 652:	ec cf       	rjmp	.-40     	; 0x62c <main+0x12>
+
+00000654 <_exit>:
+ 654:	f8 94       	cli
+
+00000656 <__stop_program>:
+ 656:	ff cf       	rjmp	.-2      	; 0x656 <__stop_program>

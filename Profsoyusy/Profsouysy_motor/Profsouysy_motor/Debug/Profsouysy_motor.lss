@@ -1,0 +1,152 @@
+
+Profsouysy_motor.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000ca  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000011e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000011e  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000150  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000028  00000000  00000000  0000018c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000058d  00000000  00000000  000001b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000051a  00000000  00000000  00000741  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000215  00000000  00000000  00000c5b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  00000e70  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002f2  00000000  00000000  00000ea4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000018  00000000  00000000  00001196  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 3f 00 	call	0x7e	; 0x7e <main>
+  64:	0c 94 63 00 	jmp	0xc6	; 0xc6 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <initPorts>:
+#include <avr/io.h>
+#define F_CPU 8000000UL
+#include <util/delay.h>
+
+void initPorts() {
+  DDRD = 0b00000011; PORTD |= (1<<3) | (1<<4) | (1<<5) | (1<<6);
+  6c:	83 e0       	ldi	r24, 0x03	; 3
+  6e:	81 bb       	out	0x11, r24	; 17
+  70:	82 b3       	in	r24, 0x12	; 18
+  72:	88 67       	ori	r24, 0x78	; 120
+  74:	82 bb       	out	0x12, r24	; 18
+  DDRC &= ~(1 << 7); 
+  76:	84 b3       	in	r24, 0x14	; 20
+  78:	8f 77       	andi	r24, 0x7F	; 127
+  7a:	84 bb       	out	0x14, r24	; 20
+  7c:	08 95       	ret
+
+0000007e <main>:
+}
+
+int main(void)
+{
+  initPorts();
+  7e:	0e 94 36 00 	call	0x6c	; 0x6c <initPorts>
+
+  while (1)
+  {
+	  if(PINC & (1 << 7)) {
+  82:	9f 9b       	sbis	0x13, 7	; 19
+  84:	10 c0       	rjmp	.+32     	; 0xa6 <main+0x28>
+			if (!(PIND & (1 << 5))) {
+  86:	85 99       	sbic	0x10, 5	; 16
+  88:	07 c0       	rjmp	.+14     	; 0x98 <main+0x1a>
+				PORTD |= (1 << 0);
+  8a:	82 b3       	in	r24, 0x12	; 18
+  8c:	81 60       	ori	r24, 0x01	; 1
+  8e:	82 bb       	out	0x12, r24	; 18
+				PORTD |= (1 << 1);
+  90:	82 b3       	in	r24, 0x12	; 18
+  92:	82 60       	ori	r24, 0x02	; 2
+  94:	82 bb       	out	0x12, r24	; 18
+  96:	f5 cf       	rjmp	.-22     	; 0x82 <main+0x4>
+			}
+			else {
+				PORTD |=  (1 << 0);
+  98:	82 b3       	in	r24, 0x12	; 18
+  9a:	81 60       	ori	r24, 0x01	; 1
+  9c:	82 bb       	out	0x12, r24	; 18
+				PORTD &= ~(1 << 1);
+  9e:	82 b3       	in	r24, 0x12	; 18
+  a0:	8d 7f       	andi	r24, 0xFD	; 253
+  a2:	82 bb       	out	0x12, r24	; 18
+  a4:	ee cf       	rjmp	.-36     	; 0x82 <main+0x4>
+			}
+	  }
+	  else {
+		  if (!(PIND & (1 << 6))) {
+  a6:	86 99       	sbic	0x10, 6	; 16
+  a8:	07 c0       	rjmp	.+14     	; 0xb8 <main+0x3a>
+				PORTD |= (1 << 0);
+  aa:	82 b3       	in	r24, 0x12	; 18
+  ac:	81 60       	ori	r24, 0x01	; 1
+  ae:	82 bb       	out	0x12, r24	; 18
+				PORTD |= (1 << 1);
+  b0:	82 b3       	in	r24, 0x12	; 18
+  b2:	82 60       	ori	r24, 0x02	; 2
+  b4:	82 bb       	out	0x12, r24	; 18
+  b6:	e5 cf       	rjmp	.-54     	; 0x82 <main+0x4>
+			}
+			else {
+				PORTD &= ~(1 << 0);
+  b8:	82 b3       	in	r24, 0x12	; 18
+  ba:	8e 7f       	andi	r24, 0xFE	; 254
+  bc:	82 bb       	out	0x12, r24	; 18
+				PORTD |=  (1 << 1);	
+  be:	82 b3       	in	r24, 0x12	; 18
+  c0:	82 60       	ori	r24, 0x02	; 2
+  c2:	82 bb       	out	0x12, r24	; 18
+  c4:	de cf       	rjmp	.-68     	; 0x82 <main+0x4>
+
+000000c6 <_exit>:
+  c6:	f8 94       	cli
+
+000000c8 <__stop_program>:
+  c8:	ff cf       	rjmp	.-2      	; 0xc8 <__stop_program>
